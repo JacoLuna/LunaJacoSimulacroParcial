@@ -1,0 +1,23 @@
+<table>
+  <tr>
+    <th>nombre</th>
+    <th>tipo</th>
+    <th>fechaDeEstreno</th>
+    <th>actores</th>
+    <th>cantidad de publico</th>
+  </tr>
+  @for (pelicula of peliculas; track $index) {
+  <tr>
+    <td>{{ pelicula.Nombre }}</td>
+    <td>{{ pelicula.tipo }}</td>
+    <td>{{ pelicula.fechaDeEstreno }}</td>
+    <td>
+      @for (actor of pelicula.actores; track $index) {
+      {{ actor.Nombre + " " + actor.apellido }}<br />
+      }
+    </td>
+    <td>{{ pelicula.cantidadDePublico }}</td>
+  </tr>
+
+  }
+</table>

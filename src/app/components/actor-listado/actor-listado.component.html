@@ -1,0 +1,12 @@
+<table>
+  <tr>
+    <th>Nombre</th>
+    <th>Apellido</th>
+  </tr>
+  @for (actor of actores; track $index) {
+  <tr (click)="selectActor($event)">
+    <td>{{ actor.Nombre }}</td>
+    <td>{{ actor.apellido }}</td>
+  </tr>
+  }
+</table>

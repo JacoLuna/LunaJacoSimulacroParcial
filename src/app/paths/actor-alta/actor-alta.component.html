@@ -1,0 +1,16 @@
+<app-nav-bar></app-nav-bar>
+
+<form>
+    <div class="form-group">
+      <label for="formGroupExampleInput">Nombre </label>
+      <input type="text" class="form-control" id="Nombre" placeholder="Nombre" [value]="nombre" [(ngModel)]="nombre" name="nombre">
+    </div>
+    <div class="form-group">
+      <label for="formGroupExampleInput2">Apellido</label>
+      <input type="text" class="form-control" id="apellido" placeholder="apellido" [value]="apellido" [(ngModel)]="apellido" name="apellido">
+    </div>
+
+    <app-tabla-paises (paisEvent)="selectPelicula($event)" ></app-tabla-paises>
+    <br>
+    <button type="button" (click)="addActor()">Ingresar actor</button>
+</form>

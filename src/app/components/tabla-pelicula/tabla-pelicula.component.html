@@ -1,0 +1,12 @@
+<table>
+    <tr>
+    <th>nombre</th>
+    <th>foto</th>
+    </tr>
+    @for (pelicula of peliculas; track $index) {
+        <tr (click)="selectPelicula($event)">
+          <td>{{pelicula.Nombre}}</td>
+          <td><img [src]="pelicula.FotoDeLaPelicula" alt="foto"></td>
+        </tr>
+    }
+</table>

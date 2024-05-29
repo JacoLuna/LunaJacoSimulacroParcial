@@ -1,0 +1,19 @@
+<section id="content">
+  <app-nav-bar></app-nav-bar>
+  <div class="container py-4">
+
+    <div class="p-5 mb-4 bg-body-tertiary rounded-3">
+      <div id="tablaPelicula">
+        <h1>Peliculas</h1>
+        <app-tabla-pelicula (eventSelectedMovie)="selectedMovie($event)"></app-tabla-pelicula>
+      </div>
+      
+    </div>
+    <div class="p-5 mb-4 bg-body-tertiary rounded-3">
+        <h2>detalle peliculas</h2>
+        <app-detalle-pelicula [peliculas]="detallePelicula"></app-detalle-pelicula>
+    </div>
+
+    <!-- <footer class="pt-3 mt-4 text-body-secondary border-top">© 2024</footer> -->
+  </div>
+</section>

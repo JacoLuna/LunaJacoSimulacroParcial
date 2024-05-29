@@ -1,0 +1,11 @@
+ @for (actor of actores; track $index) {
+    <div class="form-check">
+        <input class="form-check-input" type="checkbox" value="actor.Nombre" [id]="actor.Nombre" 
+        (click)="clickActor(actor, $event)">
+        <label class="form-check-label" [for]="actor.Nombre">
+            {{actor.Nombre + " " + actor.apellido}}
+        </label>
+    </div>
+}
+
+
