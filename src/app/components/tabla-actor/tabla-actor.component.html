@@ -1,11 +1,24 @@
- @for (actor of actores; track $index) {
-    <div class="form-check">
-        <input class="form-check-input" type="checkbox" value="actor.Nombre" [id]="actor.Nombre" 
-        (click)="clickActor(actor, $event)">
-        <label class="form-check-label" [for]="actor.Nombre">
-            {{actor.Nombre + " " + actor.apellido}}
-        </label>
-    </div>
+@for (actor of actores; track $index) {
+<form [formGroup]="frmGroup">
+  <div class="form-check">
+    <input
+      class="form-check-input"
+      type="checkbox"
+      value="actor.Nombre"
+      [id]="actor.Nombre"
+      (click)="clickActor(actor, $event)"
+      formControlName="actores"
+    />
+
+    <label class="form-check-label" [for]="actor.Nombre">
+      {{ actor.Nombre + " " + actor.apellido }}
+    </label>
+  </div>
+  <!-- @if ( this.frmGroup.controls?.['actores']?.touched &&
+        this.frmGroup.controls?.['actores']?.invalid) {
+            @if(errorControl['actores'].errors?.['required']) {
+            <span style="color: red"> campo obligatorio </span>
+        } 
+    } -->
+</form>
 }
-
-

@@ -1,11 +1,10 @@
 export class Pais {
-    id: string = "";
     nombre: string;
     bandera: string;
-    idioma: string;
-    constructor(nombre: string,bandera: string ,idioma: string){
+    continente: string;
+    constructor(nombre: string,bandera: string ,continente: string){
         this.nombre = nombre;
         this.bandera = bandera;
-        this.idioma = idioma;
+        this.continente = continente;
     }
 }

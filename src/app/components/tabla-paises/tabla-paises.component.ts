@@ -1,5 +1,6 @@
 import { Component, EventEmitter, OnInit, Output } from '@angular/core';
 import { PaisesService } from '../../services/pais.service';
+import { Pais } from '../../classes/pais';
 
 @Component({
   selector: 'app-tabla-paises',
@@ -9,18 +10,21 @@ import { PaisesService } from '../../services/pais.service';
   styleUrl: './tabla-paises.component.scss',
 })
 export class TablaPaisesComponent implements OnInit {
+  @Output() paisEvent = new EventEmitter<Pais>();
+  paises : Pais[] = [];
   constructor(private paisSrv: PaisesService) {}
 
-  @Output() paisEvent = new EventEmitter<string>();
 
   ngOnInit(): void {
-    this.paisSrv.get().subscribe((pais) => {
-      console.log(pais);
+    // this.paisSrv.get().subscribe((pais) => {
+    //   console.log(pais);
+    // });
+    this.paisSrv.getPaises().subscribe( e => {
+      this.paises = e;
     });
   }
 
-  selectPais(value: string) {
-    console.log(value);
-    this.paisEvent.emit(value);
+  selectPais(pais: Pais) {
+    this.paisEvent.emit(pais);
   }
 }

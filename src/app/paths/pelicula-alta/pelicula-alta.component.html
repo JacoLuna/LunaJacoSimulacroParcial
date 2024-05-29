@@ -1,45 +1,83 @@
 <app-nav-bar></app-nav-bar>
-<form>
-    <div class="form-group">
-      <label for="formGroupExampleInput">Nombre </label>
-      <input type="text" class="form-control" id="Nombre" placeholder="Nombre" [value]="nombre" [(ngModel)]="nombre" name="nombre">
-    </div>
-    <div class="form-group">
-      <label for="formGroupExampleInput2">cantidad de publico</label>
-      <input 
-      type="number" 
-      class="form-control" 
-      id="cantidadDePublico"
-      placeholder="cantidad de publico" 
-      [value]="cantidadDePublico" 
-      [(ngModel)]="cantidadDePublico" name="apellido">
-    </div>
-    <div class="form-group">
-        <label for="formGroupExampleInput">fecha de estreno</label>
-        <input type="text" class="form-control" id="fechaDeEstreno" placeholder="fecha de Estreno" 
-        [value]="fechaDeEstreno" 
-        [(ngModel)]="fechaDeEstreno" name="fechaDeEstreno">
-      </div>
-      <div class="form-group">
-        <label for="formGroupExampleInput">Tipo</label>
-        @for (tipo of tipos; track $index) {
-            <div class="form-check">
-                <label class="form-check-label" for="pais">
-                    {{tipo}}
-                </label>
-    
-                <input
-                    class="form-check-input"
-                    type="radio"
-                    name="pais"
-                    [id]="tipo"
-                    (click)="selectTipo(tipo)"
-                />
-            </div>
-        }
-    </div>
+<form [formGroup]="frm">
+  <h1>Alta de peliculas</h1>
+  <div class="form-group">
+    <label for="formGroupExampleInput">Nombre</label>
+    <input
+      type="text"
+      class="form-control"
+      id="Nombre"
+      placeholder="Nombre"
+      [value]="nombre"
+      formControlName="nombre"
+      name="nombre"
+    />
+    @if (
+    this.frm.controls?.['nombre']?.touched &&   
+    this.frm.controls?.['nombre']?.invalid) { 
+      @if(errorControl['nombre'].errors?.['required']) {
+        <span style="color: red"> campo obligatorio </span>
+      } 
+    }
+  </div>
 
-    <app-tabla-actor (addActoresEvent)="addActor($event)" (delActoresEvent)="delActor($event)"></app-tabla-actor>
-    <br>
-    <button type="button" (click)="addPelicula()">Ingresar pelicula</button>
+  <div class="form-group">
+    <label for="formGroupExampleInput2">cantidad de publico</label>
+    <input
+      type="number"
+      class="form-control"
+      id="cantidadDePublico"
+      placeholder="cantidad de publico"
+      [value]="cantidadDePublico"
+      formControlName="cantPublico"
+      name="cantPublico"
+    />
+    @if (this.frm.controls?.['cantPublico']?.touched &&
+    this.frm.controls?.['cantPublico']?.invalid) { @if
+    (errorControl['cantPublico'].errors?.['required']) {
+    <span style="color: red"> campo obligatorio </span>
+    } }
+  </div>
+  <div class="form-group">
+    <label for="formGroupExampleInput">fecha de estreno</label>
+    <input
+      type="date"
+      class="form-control"
+      id="fechaDeEstreno"
+      placeholder="fecha de Estreno"
+      [value]="fechaDeEstreno"
+      name="fechaDeEstreno"
+      formControlName="fechaDeEstreno"
+    />
+    @if (this.frm.controls?.['fechaDeEstreno']?.touched &&
+    this.frm.controls?.['fechaDeEstreno']?.invalid) { @if
+    (errorControl['fechaDeEstreno'].errors?.['required']) {
+    <span style="color: red"> campo obligatorio </span>
+    } }
+  </div>
+  <div class="form-group">
+    <label for="formGroupExampleInput">Tipo</label>
+    @for (tipo of tipos; track $index) {
+    <div class="form-check">
+      <label class="form-check-label" for="pais">
+        {{ tipo }}
+      </label>
+
+      <input
+        class="form-check-input"
+        type="radio"
+        name="pais"
+        [id]="tipo"
+        (click)="selectTipo(tipo)"
+      />
+    </div>
+    }
+  </div>
+
+  <app-tabla-actor
+    (addActoresEvent)="addActor($event)"
+    (delActoresEvent)="delActor($event)"
+  ></app-tabla-actor>
+  <br />
+  <button type="button" (click)="addPelicula()">Ingresar pelicula</button>
 </form>

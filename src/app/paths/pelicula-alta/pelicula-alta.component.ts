@@ -1,11 +1,10 @@
 import { Component } from '@angular/core';
 import { NavBarComponent } from "../../components/nav-bar/nav-bar.component";
 import { CommonModule } from '@angular/common';
-import { FormsModule } from '@angular/forms';
+import { FormBuilder, FormGroup, FormsModule, Validators, ReactiveFormsModule } from '@angular/forms';
 import { TablaActorComponent } from "../../components/tabla-actor/tabla-actor.component";
 import { Actor } from '../../classes/actor';
 import { Pelicula } from '../../classes/pelicula';
-import { ETipoPelicula } from '../../enums/Etipo-pelicula';
 import { PeliculasService } from '../../services/peliculas.service';
 
 @Component({
@@ -13,7 +12,7 @@ import { PeliculasService } from '../../services/peliculas.service';
     standalone: true,
     templateUrl: './pelicula-alta.component.html',
     styleUrl: './pelicula-alta.component.scss',
-    imports: [FormsModule, CommonModule, NavBarComponent, TablaActorComponent]
+    imports: [FormsModule, CommonModule, NavBarComponent, TablaActorComponent, ReactiveFormsModule]
 })
 export class PeliculaAltaComponent {
   
@@ -25,7 +24,18 @@ export class PeliculaAltaComponent {
   tipo!: string;
   actores: Actor[] = []
   
-  constructor(private peliculasSrv: PeliculasService){
+  frm: FormGroup;
+  
+  constructor(private peliculasSrv: PeliculasService, private frmBuilder: FormBuilder){
+      this.frm = this.frmBuilder.group({
+        nombre : ['',[Validators.required]],
+        fechaDeEstreno : ['',[Validators.required]],
+        cantPublico :['',[Validators.required]],
+        actores: ['',[Validators.required]]
+      })
+  }
+  get errorControl(){
+    return this.frm?.controls;
   }
 
   addPelicula() {
